@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Report on Juvenile Justice in the USA</title>
+  <meta name="description" content="Website in English about juvenile justice in the United States, ready for GitHub Pages." />
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=boska@400,500,700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.125rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.25rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.5rem);
+      --text-3xl: clamp(2.5rem, 1rem + 4vw, 5rem);
+      --text-hero: clamp(3rem, 0.5rem + 7vw, 7rem);
+      --space-2:.5rem; --space-3:.75rem; --space-4:1rem; --space-5:1.25rem; --space-6:1.5rem; --space-8:2rem; --space-10:2.5rem; --space-12:3rem; --space-16:4rem; --space-20:5rem;
+      --color-bg:#f7f6f2; --color-surface:#f9f8f5; --color-surface-2:#fbfbf9; --color-surface-offset:#f0ede7; --color-border:#d6d2ca; --color-divider:#ddd8d0;
+      --color-text:#26231d; --color-text-muted:#6e695f; --color-text-faint:#9d978b; --color-text-inverse:#f8f6f1;
+      --color-primary:#01696f; --color-primary-hover:#0c4e54; --color-primary-highlight:#d7e4e1; --color-warning:#9a4c20; --color-warning-soft:#e8d5c8;
+      --shadow-sm:0 2px 10px rgba(30,24,18,.05); --shadow-md:0 10px 30px rgba(30,24,18,.09); --shadow-lg:0 24px 60px rgba(30,24,18,.12);
+      --radius-sm:.5rem; --radius-md:.85rem; --radius-lg:1.2rem; --radius-xl:1.75rem; --radius-full:9999px;
+      --font-body:'Satoshi', Inter, sans-serif; --font-display:'Boska', Georgia, serif;
+    }
+
+    [data-theme="dark"] {
+      --color-bg:#161513; --color-surface:#1d1b19; --color-surface-2:#22201d; --color-surface-offset:#2a2723; --color-border:#3a3732; --color-divider:#2b2824;
+      --color-text:#e9e4db; --color-text-muted:#b1aa9d; --color-text-faint:#7c7468; --color-text-inverse:#161513;
+      --color-primary:#56a1ac; --color-primary-hover:#3a8793; --color-primary-highlight:#27373a; --color-warning:#d59465; --color-warning-soft:#46362b;
+      --shadow-sm:0 2px 10px rgba(0,0,0,.2); --shadow-md:0 10px 30px rgba(0,0,0,.28); --shadow-lg:0 24px 60px rgba(0,0,0,.4);
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{min-height:100vh;font-family:var(--font-body);font-size:var(--text-base);line-height:1.65;background:var(--color-bg);color:var(--color-text);overflow-x:hidden}
+    img,svg{display:block;max-width:100%;height:auto}
+    a{text-decoration:none;color:inherit}
+    button{font:inherit;border:none;background:none;color:inherit;cursor:pointer}
+
+    .skip-link{position:absolute;left:-9999px;top:auto}
+    .skip-link:focus{left:1rem;top:1rem;z-index:999;background:var(--color-surface);padding:.8rem 1rem;border-radius:var(--radius-md);border:1px solid var(--color-border)}
+
+    .container{width:min(1160px,calc(100% - 2rem));margin-inline:auto}
+
+    .grain::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.05;
+      background-image:
+        radial-gradient(circle at 20% 20%,var(--color-text) 0 1px,transparent 1px),
+        radial-gradient(circle at 80% 30%,var(--color-text) 0 1px,transparent 1px),
+        radial-gradient(circle at 50% 80%,var(--color-text) 0 1px,transparent 1px);
+      background-size:180px 180px;
+      mix-blend-mode:multiply;
+      z-index:-2
+    }
+
+    .orbs{position:fixed;inset:0;pointer-events:none;z-index:-3;overflow:hidden}
+    .orb{position:absolute;border-radius:50%;filter:blur(40px);opacity:.18;animation:float 10s ease-in-out infinite}
+    .orb.a{width:260px;height:260px;background:var(--color-primary-highlight);top:4%;left:-4%}
+    .orb.b{width:220px;height:220px;background:var(--color-warning-soft);top:38%;right:-5%;animation-delay:-3s}
+    .orb.c{width:180px;height:180px;background:rgba(1,105,111,.12);bottom:10%;left:50%;animation-delay:-6s}
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:100;
+      background:color-mix(in srgb,var(--color-bg) 80%,transparent);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--color-divider)
+    }
+
+    .nav{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0}
+    .brand{display:flex;align-items:center;gap:.9rem}
+    .brand-mark{width:46px;height:46px;color:var(--color-primary)}
+    .brand-copy small{display:block;font-size:var(--text-xs);letter-spacing:.14em;text-transform:uppercase;color:var(--color-text-muted)}
+    .brand-copy strong{font-size:var(--text-sm)}
+
+    .nav-links{display:flex;align-items:center;gap:.4rem;flex-wrap:wrap}
+    .nav-links a,.theme-toggle{min-height:44px;padding:.7rem .95rem;border-radius:var(--radius-full);font-size:var(--text-sm)}
+    .nav-links a:hover,.theme-toggle:hover{background:var(--color-surface-offset)}
+    .theme-toggle{display:grid;place-items:center;border:1px solid var(--color-border);background:var(--color-surface)}
+
+    .hero{padding:clamp(3.5rem,8vw,7rem) 0 4rem}
+    .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:var(--space-10);align-items:center}
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:.55rem;
+      padding:.55rem .95rem;
+      background:var(--color-primary-highlight);
+      color:var(--color-primary);
+      border-radius:var(--radius-full);
+      font-size:var(--text-xs);
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:800
+    }
+
+    h1{font-family:var(--font-display);font-size:var(--text-hero);line-height:.92;letter-spacing:-.035em;margin:1rem 0 1rem}
+    .hero p{max-width:60ch;color:var(--color-text-muted)}
+    .cta-row{display:flex;gap:1rem;flex-wrap:wrap;margin-top:1.6rem}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      gap:.7rem;
+      min-height:46px;
+      padding:1rem 1.2rem;
+      border-radius:var(--radius-full);
+      border:1px solid var(--color-border);
+      transition:transform .25s ease, background .25s ease, border-color .25s ease, box-shadow .25s ease
+    }
+    .btn:hover{transform:translateY(-3px);box-shadow:var(--shadow-sm)}
+    .btn-primary{background:var(--color-primary);color:white;border-color:transparent}
+    .btn-primary:hover{background:var(--color-primary-hover)}
+    .btn-secondary{background:var(--color-surface)}
+
+    .hero-card,.card,.fact,.compare-box,.timeline-item,.source-box,.note-box{
+      background:linear-gradient(180deg,var(--color-surface),var(--color-surface-2));
+      border:1px solid var(--color-border);
+      box-shadow:var(--shadow-sm)
+    }
+
+    .hero-card{
+      position:relative;
+      padding:var(--space-8);
+      border-radius:2rem;
+      overflow:hidden;
+      box-shadow:var(--shadow-lg)
+    }
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -40px -40px auto;
+      width:160px;
+      height:160px;
+      border-radius:50%;
+      background:var(--color-primary-highlight)
+    }
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:18px auto auto 18px;
+      width:72px;
+      height:72px;
+      border-radius:50%;
+      border:1px dashed color-mix(in srgb,var(--color-primary) 35%, transparent);
+      animation:spin 14s linear infinite
+    }
+
+    .section{padding:var(--space-16) 0}
+    .section-head{display:flex;justify-content:space-between;align-items:end;gap:1rem;margin-bottom:var(--space-8)}
+    .section-head h2{font-family:var(--font-display);font-size:var(--text-2xl);line-height:1}
+    .section-head p{max-width:58ch;color:var(--color-text-muted)}
+
+    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem}
+
+    .card,.compare-box,.fact,.timeline-item,.source-box,.note-box{border-radius:var(--radius-xl);padding:1.35rem}
+    .card,.compare-box,.fact{transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease}
+    .card:hover,.compare-box:hover,.fact:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--shadow-md);
+      border-color:color-mix(in srgb,var(--color-primary) 35%, var(--color-border))
+    }
+
+    .card h3,.compare-box h3{font-size:var(--text-lg);margin:.85rem 0 .5rem}
+    .card p,.compare-box p,.timeline-item p,.fact span,.source-box li,.note-box p{color:var(--color-text-muted);font-size:var(--text-sm)}
+
+    .timeline{display:grid;gap:1rem}
+    .timeline-item{display:grid;grid-template-columns:110px 1fr;gap:1rem;align-items:start}
+    .year{font-size:var(--text-lg);font-weight:800;color:var(--color-primary)}
+
+    .compare-box ul{list-style:none;display:grid;gap:.75rem}
+    .compare-box li{padding:.78rem .9rem;border-radius:var(--radius-md);background:var(--color-surface-offset)}
+
+    .question-card{grid-column:1 / -1}
+    .question-card h3{font-size:var(--text-lg);margin-bottom:.65rem}
+    .question-card .q{
+      display:block;
+      font-size:var(--text-xs);
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--color-primary);
+      font-weight:800;
+      margin-bottom:.6rem
+    }
+
+    .fact strong{
+      display:block;
+      font-family:var(--font-display);
+      font-size:var(--text-xl);
+      color:var(--color-primary);
+      margin-bottom:.35rem
+    }
+
+    .sources{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    .source-box ul{list-style:none;display:grid;gap:.8rem}
+    .source-box li a{color:var(--color-primary);word-break:break-word}
+    .note-box{margin-top:1rem;border-style:dashed}
+
+    footer{padding:var(--space-12) 0 var(--space-16);color:var(--color-text-muted)}
+    .footer-box{padding:1.2rem 1.35rem;border-radius:var(--radius-xl);background:var(--color-surface);border:1px solid var(--color-border)}
+
+    .reveal{opacity:0;transform:translateY(28px) scale(.98);transition:opacity .75s ease, transform .75s ease}
+    .reveal.visible{opacity:1;transform:translateY(0) scale(1)}
+    .draw-path{stroke-dasharray:1200;stroke-dashoffset:1200;animation:draw 3.3s ease forwards}
+    .pulse{animation:pulse 2.8s ease-in-out infinite}
+    .floaty{animation:float 6s ease-in-out infinite}
+    .bob{animation:bob 4.6s ease-in-out infinite}
+    .tilt{animation:tilt 6s ease-in-out infinite}
+    .shine{position:relative;overflow:hidden}
+    .shine::after{
+      content:"";
+      position:absolute;
+      inset:-120% auto auto -25%;
+      width:40%;
+      height:300%;
+      transform:rotate(22deg);
+      background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+      animation:shine 7s ease-in-out infinite
+    }
+
+    @keyframes draw{to{stroke-dashoffset:0}}
+    @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+    @keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(8px)}}
+    @keyframes tilt{0%,100%{transform:rotate(0)}25%{transform:rotate(1.5deg)}75%{transform:rotate(-1.5deg)}}
+    @keyframes shine{0%,100%{left:-45%}50%{left:120%}}
+    @keyframes spin{to{transform:rotate(360deg)}}
+
+    @media (max-width: 960px){
+      .hero-grid,.grid-3,.grid-2,.sources{grid-template-columns:1fr}
+      .timeline-item{grid-template-columns:1fr}
+      .section-head,.nav{flex-direction:column;align-items:flex-start}
+      .nav-links{width:100%;justify-content:space-between}
+      h1{font-size:var(--text-3xl)}
+    }
+
+    @media (prefers-reduced-motion: reduce){
+      *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+      .reveal{opacity:1;transform:none}
+    }
+  </style>
+</head>
+<body class="grain">
+  <a class="skip-link" href="#content">Skip to content</a>
+
+  <div class="orbs" aria-hidden="true">
+    <div class="orb a"></div>
+    <div class="orb b"></div>
+    <div class="orb c"></div>
+  </div>
+
+  <header>
+    <div class="container nav">
+      <div class="brand">
+        <svg class="brand-mark" viewBox="0 0 64 64" aria-label="Site logo">
+          <rect x="10" y="10" width="44" height="44" rx="14" fill="none" stroke="currentColor" stroke-width="3"></rect>
+          <path d="M22 41c5-10 15-18 20-20 0 9-4 19-20 20Z" fill="currentColor" opacity=".18"></path>
+          <path d="M22 41c5-10 15-18 20-20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" class="draw-path"></path>
+          <circle cx="43" cy="22" r="4" fill="currentColor" class="pulse"></circle>
+        </svg>
+        <div class="brand-copy">
+          <small>School research project</small>
+          <strong>Juvenile Justice in the USA</strong>
+        </div>
+      </div>
+
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#history">History</a>
+        <a href="#differences">Differences</a>
+        <a href="#questions">Questions</a>
+        <a href="#sources">Sources</a>
+        <a href="#credits">Credits</a>
+        <button class="theme-toggle" data-theme-toggle aria-label="Change theme"></button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="content">
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="reveal visible">
+          <span class="eyebrow">Full English version</span>
+          <h1>The Juvenile Justice System in the United States</h1>
+          <p>This website explains in a simple and visual way how juvenile justice works in the United States: when it began, which terms it uses, what rights minors have, and which measures are used instead of prison. All answers are written in English and supported by official sources.</p>
+          <div class="cta-row">
+            <a class="btn btn-primary" href="#questions">Go to the answers</a>
+            <a class="btn btn-secondary" href="#sources">See the sources</a>
+          </div>
+        </div>
+
+        <div class="hero-card shine reveal">
+          <svg viewBox="0 0 620 430" aria-label="Juvenile court illustration" class="floaty">
+            <rect x="72" y="82" width="476" height="262" rx="28" fill="var(--color-surface-offset)" stroke="var(--color-border)"></rect>
+            <rect x="118" y="118" width="126" height="116" rx="22" fill="var(--color-primary-highlight)"></rect>
+            <rect x="270" y="120" width="214" height="24" rx="12" fill="var(--color-border)"></rect>
+            <rect x="270" y="163" width="182" height="18" rx="9" fill="var(--color-border)" opacity=".82"></rect>
+            <rect x="270" y="197" width="152" height="18" rx="9" fill="var(--color-border)" opacity=".55"></rect>
+            <path d="M152 212c8-25 32-44 57-44s49 19 57 44" fill="none" stroke="var(--color-primary)" stroke-width="6" stroke-linecap="round" class="draw-path"></path>
+            <circle cx="208" cy="151" r="26" fill="var(--color-primary)" opacity=".22"></circle>
+            <path d="M208 141v22M197 152h22" stroke="var(--color-primary)" stroke-width="5" stroke-linecap="round"></path>
+            <path d="M400 282c27 0 49-22 49-49s-22-49-49-49-49 22-49 49 22 49 49 49Z" fill="none" stroke="var(--color-warning)" stroke-width="8" opacity=".8"></path>
+            <path d="M381 233l13 13 26-26" fill="none" stroke="var(--color-warning)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" class="draw-path"></path>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="history">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><h2>Origins</h2></div>
+          <p>The American juvenile justice system is separate from the adult system and was created on the idea that young people need different responses, focused more on rehabilitation than on punishment alone.</p>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline-item reveal">
+            <div class="year">1899</div>
+            <div>
+              <h3>It begins in Chicago</h3>
+              <p>The first court for young people was created in Chicago. It is considered the beginning of the modern juvenile justice system in the United States.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="year">1967</div>
+            <div>
+              <h3>More legal protections</h3>
+              <p>The Supreme Court recognized that minors must also have important due process protections, such as knowing the charges against them and having a lawyer.</p>
+            </div>
+          </div>
+
+          <div class="timeline-item reveal">
+            <div class="year">1974</div>
+            <div>
+              <h3>Main federal law</h3>
+              <p>The Juvenile Justice and Delinquency Prevention Act came into force and is still the main federal point of reference today.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="differences">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><h2>Different words and a different logic</h2></div>
+          <p>The juvenile system does not always use the same terms as the adult criminal process because the basic idea is different: guiding the young person toward responsibility and change.</p>
+        </div>
+
+        <div class="grid-2">
+          <div class="compare-box reveal tilt">
+            <h3>Juvenile system</h3>
+            <ul>
+              <li><strong>Delinquency</strong> instead of crime in the adult sense</li>
+              <li><strong>Adjudication</strong> instead of the classic trial with guilty or not guilty</li>
+              <li><strong>Disposition</strong> instead of the traditional criminal sentence</li>
+              <li><strong>Probation</strong> as the most common measure</li>
+            </ul>
+          </div>
+
+          <div class="compare-box reveal bob">
+            <h3>Adult system</h3>
+            <ul>
+              <li><strong>Crime / offense</strong> to indicate the offense</li>
+              <li><strong>Trial</strong> as the ordinary trial</li>
+              <li><strong>Sentencing</strong> for sentencing</li>
+              <li><strong>Incarceration</strong> with a more punitive approach</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="questions">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><h2>Answers to the questions</h2></div>
+          <p>The five research questions have been rewritten completely in English and each one has a clear, direct answer ready to present.</p>
+        </div>
+
+        <div class="grid-2">
+          <article class="card question-card reveal">
+            <span class="q">Question 1</span>
+            <h3>What is the minimum age of criminal responsibility in this country?</h3>
+            <p>In the United States there is no single minimum age valid for the whole country. The official OJJDP guide explains that in most states there is no minimum age to appear before juvenile court; in the states that do set one, the most common age is 10, although in some states it can be as low as 6 or 7.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="q">Question 2</span>
+            <h3>What is the name of the main law or organization that deals with young offenders?</h3>
+            <p>The main federal law is the <strong>Juvenile Justice and Delinquency Prevention Act</strong> of 1974. The most important government agency is the <strong>Office of Juvenile Justice and Delinquency Prevention</strong>, also known as OJJDP.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="q">Question 3</span>
+            <h3>List three measures that are not prison.</h3>
+            <p>Three non-custodial measures are: <strong>probation</strong>, <strong>diversion</strong>, and <strong>community-based services or programs</strong>, meaning educational and support interventions carried out in the community.</p>
+          </article>
+
+          <article class="card reveal">
+            <span class="q">Question 4</span>
+            <h3>What rights does a minor have when arrested in this country?</h3>
+            <p>In the federal system, a minor must be informed of their constitutional rights and of the charges against them. Parents or a guardian must be notified, the young person must be brought quickly before a magistrate, and the process may include privacy protections such as closed hearings and protected records.</p>
+          </article>
+
+          <article class="card question-card reveal">
+            <span class="q">Question 5</span>
+            <h3>Find one interesting fact or statistic about youth crime.</h3>
+            <p>One very interesting fact is that only about <strong>1% of young people</strong> are sent to adult court. This means that the large majority remain in the separate juvenile system, which is designed specifically for youth.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><h2>Quick facts</h2></div>
+          <p>These numbers help summarize the most important points of the system in a quick and memorable way.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="fact reveal"><strong>1899</strong><span>Year in which the first modern juvenile court was founded in Chicago.</span></div>
+          <div class="fact reveal"><strong>1974</strong><span>Year of the main federal juvenile justice law.</span></div>
+          <div class="fact reveal"><strong>1%</strong><span>Approximate share of youth sent to adult court.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sources">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><h2>Sources</h2></div>
+          <p>These are the main sources used to prepare the answers included in this website.</p>
+        </div>
+
+        <div class="sources">
+          <div class="source-box reveal">
+            <h3>Main source</h3>
+            <ul>
+              <li><strong>OJJDP – Juvenile Justice 101</strong><br><a href="https://ojjdp.ojp.gov/juvenile-justice-101" target="_blank" rel="noopener noreferrer">https://ojjdp.ojp.gov/juvenile-justice-101</a></li>
+            </ul>
+          </div>
+
+          <div class="source-box reveal">
+            <h3>Additional source</h3>
+            <ul>
+              <li><strong>U.S. Department of Justice – Justice Manual, 9-8.000 Principles of Federal Juvenile Prosecution</strong><br><a href="https://www.justice.gov/jm/jm-9-8000-juveniles" target="_blank" rel="noopener noreferrer">https://www.justice.gov/jm/jm-9-8000-juveniles</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="note-box reveal">
+          <p>Note: some aspects, such as the minimum age or local procedures, can change from state to state. For this reason, the website focuses on general federal rules and the national framework rather than on a single state law.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="credits">
+      <div class="container">
+        <div class="section-head reveal">
+          <div><h2>Credits</h2></div>
+          <p>This final screen summarizes the participants who helped create the research project and the website.</p>
+        </div>
+
+        <div class="hero-card shine reveal" style="padding:clamp(1.5rem,4vw,3rem);">
+          <div class="grid-2" style="align-items:center;">
+            <div>
+              <span class="eyebrow">Participants</span>
+              <h3 style="font-family:var(--font-display);font-size:var(--text-2xl);line-height:1;margin:1rem 0;">Work group</h3>
+              <p style="color:var(--color-text-muted);max-width:52ch;">This research project on the juvenile justice system in the United States was created as a group activity. The names below appear in a dedicated final screen, suitable both for a presentation and for publication on GitHub Pages.</p>
+            </div>
+
+            <div>
+              <div class="grid-2">
+                <div class="fact reveal"><strong>Christian</strong><span>Rongo</span></div>
+                <div class="fact reveal"><strong>Marco</strong><span>Aprea</span></div>
+                <div class="fact reveal"><strong>Giuseppe</strong><span>Di Mauro</span></div>
+                <div class="fact reveal"><strong>Matias</strong><span>Delle Cave</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-box reveal">
+        <p>HTML code ready to be uploaded to GitHub Pages. Just keep this file named <strong>index.html</strong> if you want to publish it as the home page of the repository.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const root = document.documentElement;
+      const toggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+
+      const updateThemeIcon = () => {
+        toggle.innerHTML = theme === 'dark'
+          ? '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>'
+          : '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>';
+        root.setAttribute('data-theme', theme);
+      };
+
+      updateThemeIcon();
+
+      toggle.addEventListener('click', () => {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        updateThemeIcon();
+      });
+
+      const items = document.querySelectorAll('.reveal');
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) entry.target.classList.add('visible');
+        });
+      }, { threshold: 0.14 });
+
+      items.forEach(item => observer.observe(item));
+
+      const links = document.querySelectorAll('a[href^="#"]');
+      links.forEach(link => {
+        link.addEventListener('click', (e) => {
+          const target = document.querySelector(link.getAttribute('href'));
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+    })();
+  </script>
+</body>
+</html>
