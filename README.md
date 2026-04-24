@@ -1,1 +1,1 @@
-# Giustizzia-minorile-USA
+The website was built using HTML, CSS, and JavaScript to present the research in a clear and visual way, with sections, animations, and interactive elements. It was then hosted on GitHub Pages, which publishes the project directly from a GitHub repository and makes it accessible online# Giustizzia-minorile-USA
